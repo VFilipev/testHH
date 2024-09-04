@@ -11,6 +11,7 @@
   <ModalPopUp v-show="isShow" @close="isShow = false" @save="savePost"></ModalPopUp>
 </template>
 <script setup>
+
 import { ref, onMounted, watch, computed } from 'vue'
 import axios from 'axios'
 import Loading from 'vue-loading-overlay';
@@ -24,9 +25,7 @@ let isShow = ref(false)
 let pageNumber = ref(1)
 const nextPage = () => { pageNumber.value++ }
 const prevPage = () => { pageNumber.value-- }
-const selPage = (p) => {
-  pageNumber.value = p
-}
+const selPage = (p) => { pageNumber.value = p }
 const pageSize = 10
 let postsList = ref([])
 let postsListFilter = ref([])
@@ -36,6 +35,7 @@ const getPosts = async () => {
   storePosts.update(postsList.value)
   postsPagination()
 }
+
 const postsPagination = () => {
   isLoading.value = true
   setTimeout(function () {
@@ -67,6 +67,7 @@ const sortById = () => {
   }
   postsPagination()
 }
+
 const totalPage = computed(() => Math.ceil(postsList.value.length / pageSize))
 const totalPost = computed(() => postsList.value.length)
 watch(() => pageNumber.value, () => postsPagination())
